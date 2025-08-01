@@ -20,7 +20,15 @@ export async function POST(req: Request) {
     const { messages } = await req.json();
     console.log('[CHAT-API] Incoming messages:', messages);
 
-    messages.unshift(SYSTEM_PROMPT);
+    // Clean messages to be compatible with Groq API
+    const cleanMessages = messages.map((msg: any) => {
+      // Remove any 'parts' property and ensure proper format
+      const { parts, ...cleanMsg } = msg;
+      return cleanMsg;
+    });
+
+    // Add system prompt at the beginning
+    cleanMessages.unshift(SYSTEM_PROMPT);
 
     const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
@@ -30,7 +38,7 @@ export async function POST(req: Request) {
       },
       body: JSON.stringify({
         model: 'llama3-8b-8192',
-        messages,
+        messages: cleanMessages,
         stream: true,
         temperature: 0.7,
         max_tokens: 1000,
