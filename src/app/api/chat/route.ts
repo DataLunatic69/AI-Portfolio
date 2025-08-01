@@ -1,12 +1,4 @@
 import { SYSTEM_PROMPT } from './prompt';
-import { getContact } from './tools/getContact';
-import { getCrazy } from './tools/getCrazy';
-import { getInternship } from './tools/getIntership';
-import { getPresentation } from './tools/getPresentation';
-import { getProjects } from './tools/getProjects';
-import { getResume } from './tools/getResume';
-import { getSkills } from './tools/getSkills';
-import { getSports } from './tools/getSport';
 
 export const maxDuration = 30;
 
@@ -30,27 +22,6 @@ export async function POST(req: Request) {
 
     messages.unshift(SYSTEM_PROMPT);
 
-    const tools = {
-      getProjects,
-      getPresentation,
-      getResume,
-      getContact,
-      getSkills,
-      getSports,
-      getCrazy,
-      getInternship,
-    };
-
-    // Convert tools to Groq format
-    const toolDefinitions = Object.entries(tools).map(([name, tool]) => ({
-      type: 'function',
-      function: {
-        name,
-        description: tool.description,
-        parameters: tool.parameters,
-      },
-    }));
-
     const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -60,7 +31,6 @@ export async function POST(req: Request) {
       body: JSON.stringify({
         model: 'llama3-8b-8192',
         messages,
-        tools: toolDefinitions,
         stream: true,
         temperature: 0.7,
         max_tokens: 1000,
@@ -68,7 +38,9 @@ export async function POST(req: Request) {
     });
 
     if (!response.ok) {
-      throw new Error(`Groq API error: ${response.statusText}`);
+      const errorText = await response.text();
+      console.error('Groq API error details:', errorText);
+      throw new Error(`Groq API error: ${response.statusText} - ${errorText}`);
     }
 
     return new Response(response.body, {
