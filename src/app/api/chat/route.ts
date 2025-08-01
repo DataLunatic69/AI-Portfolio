@@ -41,7 +41,7 @@ export async function POST(req: Request) {
       body: JSON.stringify({
         model: 'llama3-8b-8192',
         messages: cleanMessages,
-        stream: true,
+        stream: false,
         temperature: 0.7,
         max_tokens: 1000,
       }),
@@ -53,53 +53,21 @@ export async function POST(req: Request) {
       throw new Error(`Groq API error: ${response.statusText} - ${errorText}`);
     }
 
-    // Create a streaming response that the Vercel AI SDK can handle
+    const data = await response.json();
+    const content = data.choices[0]?.message?.content || 'Sorry, I could not generate a response.';
+
+    // Create a simple streaming response that simulates real-time output
     const stream = new ReadableStream({
-      async start(controller) {
-        const reader = response.body?.getReader();
-        if (!reader) {
-          controller.close();
-          return;
-        }
-
-        try {
-          while (true) {
-            const { done, value } = await reader.read();
-            if (done) break;
-
-            const chunk = new TextDecoder().decode(value);
-            const lines = chunk.split('\n');
-
-            for (const line of lines) {
-              if (line.startsWith('data: ')) {
-                const data = line.slice(6);
-                if (data === '[DONE]') {
-                  controller.enqueue(new TextEncoder().encode('data: [DONE]\n\n'));
-                  break;
-                }
-
-                try {
-                  const parsed = JSON.parse(data);
-                  if (parsed.choices && parsed.choices[0]?.delta?.content) {
-                    const content = parsed.choices[0].delta.content;
-                    // Format for Vercel AI SDK
-                    const formattedChunk = {
-                      type: 'text-delta',
-                      textDelta: content
-                    };
-                    controller.enqueue(new TextEncoder().encode(`data: ${JSON.stringify(formattedChunk)}\n\n`));
-                  }
-                } catch (e) {
-                  // Skip invalid JSON
-                }
-              }
-            }
-          }
-        } catch (error) {
-          console.error('Streaming error:', error);
-        } finally {
-          controller.close();
-        }
+      start(controller) {
+        // Send the complete response as a single chunk
+        const responseData = {
+          type: 'text-delta',
+          textDelta: content
+        };
+        
+        controller.enqueue(new TextEncoder().encode(`data: ${JSON.stringify(responseData)}\n\n`));
+        controller.enqueue(new TextEncoder().encode('data: [DONE]\n\n'));
+        controller.close();
       },
     });
 
