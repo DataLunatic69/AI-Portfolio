@@ -59,11 +59,17 @@ export async function POST(req: Request) {
     const content = data.choices[0]?.message?.content || 'Sorry, I could not generate a response.';
     console.log('[CHAT-API] Extracted content:', content);
 
-    // Return the response in a format that the frontend can handle
+    // Return the response in Vercel AI SDK format
     return new Response(JSON.stringify({ 
       id: Date.now().toString(),
       role: 'assistant',
-      content: content
+      content: content,
+      parts: [
+        {
+          type: 'text',
+          text: content
+        }
+      ]
     }), {
       headers: {
         'Content-Type': 'application/json',
