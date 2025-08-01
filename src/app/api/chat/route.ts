@@ -41,7 +41,7 @@ export async function POST(req: Request) {
       body: JSON.stringify({
         model: 'llama3-8b-8192',
         messages: cleanMessages,
-        stream: false,
+        stream: true,
         temperature: 0.7,
         max_tokens: 1000,
       }),
@@ -53,26 +53,61 @@ export async function POST(req: Request) {
       throw new Error(`Groq API error: ${response.statusText} - ${errorText}`);
     }
 
-    const data = await response.json();
-    console.log('[CHAT-API] Groq response:', JSON.stringify(data, null, 2));
-    
-    const content = data.choices[0]?.message?.content || 'Sorry, I could not generate a response.';
-    console.log('[CHAT-API] Extracted content:', content);
-
-    // Return the response in Vercel AI SDK format
-    return new Response(JSON.stringify({ 
-      id: Date.now().toString(),
-      role: 'assistant',
-      content: content,
-      parts: [
-        {
-          type: 'text',
-          text: content
+    // Create a streaming response that the Vercel AI SDK can handle
+    const stream = new ReadableStream({
+      async start(controller) {
+        const reader = response.body?.getReader();
+        if (!reader) {
+          controller.close();
+          return;
         }
-      ]
-    }), {
+
+        try {
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+
+            const chunk = new TextDecoder().decode(value);
+            const lines = chunk.split('\n');
+
+            for (const line of lines) {
+              if (line.startsWith('data: ')) {
+                const data = line.slice(6);
+                if (data === '[DONE]') {
+                  controller.enqueue(new TextEncoder().encode('data: [DONE]\n\n'));
+                  break;
+                }
+
+                try {
+                  const parsed = JSON.parse(data);
+                  if (parsed.choices && parsed.choices[0]?.delta?.content) {
+                    const content = parsed.choices[0].delta.content;
+                    // Format for Vercel AI SDK
+                    const formattedChunk = {
+                      type: 'text-delta',
+                      textDelta: content
+                    };
+                    controller.enqueue(new TextEncoder().encode(`data: ${JSON.stringify(formattedChunk)}\n\n`));
+                  }
+                } catch (e) {
+                  // Skip invalid JSON
+                }
+              }
+            }
+          }
+        } catch (error) {
+          console.error('Streaming error:', error);
+        } finally {
+          controller.close();
+        }
+      },
+    });
+
+    return new Response(stream, {
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'text/plain; charset=utf-8',
+        'Cache-Control': 'no-cache',
+        'Connection': 'keep-alive',
       },
     });
   } catch (err) {
