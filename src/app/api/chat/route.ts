@@ -51,7 +51,53 @@ export async function POST(req: Request) {
       throw new Error(`Groq API error: ${response.statusText} - ${errorText}`);
     }
 
-    return new Response(response.body, {
+    // Create a readable stream that converts Groq's streaming format to Vercel AI SDK format
+    const stream = new ReadableStream({
+      async start(controller) {
+        const reader = response.body?.getReader();
+        if (!reader) {
+          controller.close();
+          return;
+        }
+
+        try {
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+
+            // Convert the chunk to text
+            const chunk = new TextDecoder().decode(value);
+            const lines = chunk.split('\n');
+
+            for (const line of lines) {
+              if (line.startsWith('data: ')) {
+                const data = line.slice(6);
+                if (data === '[DONE]') {
+                  controller.enqueue(new TextEncoder().encode('data: [DONE]\n\n'));
+                  break;
+                }
+
+                try {
+                  const parsed = JSON.parse(data);
+                  if (parsed.choices && parsed.choices[0]?.delta?.content) {
+                    const content = parsed.choices[0].delta.content;
+                    controller.enqueue(new TextEncoder().encode(`data: ${JSON.stringify({ type: 'text-delta', textDelta: content })}\n\n`));
+                  }
+                } catch (e) {
+                  // Skip invalid JSON
+                }
+              }
+            }
+          }
+        } catch (error) {
+          console.error('Streaming error:', error);
+        } finally {
+          controller.close();
+        }
+      },
+    });
+
+    return new Response(stream, {
       headers: {
         'Content-Type': 'text/plain; charset=utf-8',
         'Cache-Control': 'no-cache',
