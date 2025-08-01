@@ -6,18 +6,17 @@ export const getInternship = tool({
     "Gives a summary of what kind of internship I'm looking for, plus my contact info and how to reach me. Use this tool when the user asks about my internship search or how to contact me for opportunities.",
   parameters: z.object({}),
   execute: async () => {
-    return `Here’s what I’m looking for 👇
+    return `Here's what I'm looking for 👇
 
 - 📅 **Duration**: 6-month internship starting **September 2025**
-- 🌍 **Location**: Preferably **San Francisco** or anywhere in the **United States**
+- 🌍 **Location**: Preferably **Pune, Mumbai, Bangalore** 🇮🇳
 - 🧑‍💻 **Focus**: AI development, full-stack web apps, SaaS, agentic workflows
 - 🛠️ **Stack**: Python, React/Next.js, Tailwind CSS, TypeScript, GPT, RAG, etc.
-- 💼 **Visa**: I’m based in Paris 🇫🇷 so I might need **J-1 sponsorship**
-- ✅ **What I bring**: Real experience with secure on-prem GPTs (Lighton), deepsearch engines, custom RAG tools, and hackathon wins like **ETH Oxford** & **Paris Blockchain Week**
-- 🔥 I move fast, learn faster, and I’m HUNGRYYYYY for big challenges
+- ✅ **What I bring**: 2x hackathon semifinalist (NEST, Createch). Worked for 2 startups (Ziel Lab and StepsAI) providing AI and backend solutions. At Ziel Lab, I automated outreach, CRM, and SEO workflows. Besides, I have researched under Dr. Parajyothi Borah as an intern, developing modular RAG from scratch.
+- 🔥 I move fast, learn faster, and I'm HUNGRYYYYY for big challenges
 
 📬 **Contact me** via:
-- Email: raphaelgiraud12@gmail.com
+- Email: amansinghwork@gmail.com
 - LinkedIn: [linkedin.com/in/aman-singh](https://www.linkedin.com/in/aman-singh-3a6551259/)
 - GitHub: [github.com/DataLunatic69](https://github.com/DataLunatic69)
 

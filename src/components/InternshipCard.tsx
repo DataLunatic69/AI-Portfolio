@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 
 const InternshipCard = () => {
   const openMail = () => {
-    window.open('mailto:raphaelgiraud12@gmail.com', '_blank');
+    window.open('mailto:amansinghwork@gmail.com', '_blank');
   };
   const router = useRouter();
 
@@ -23,17 +23,17 @@ const InternshipCard = () => {
           {/* Avatar placeholder */}
           <div className="bg-muted h-16 w-16 overflow-hidden rounded-full shadow-md">
             <img
-              src="/avatar-raphael.jpg"
-              alt="Raphael's avatar"
+              src="/Me.jpeg"
+              alt="Aman's avatar"
               className="h-full w-full object-cover"
             />
           </div>
           <div>
             <h2 className="text-foreground text-2xl font-semibold">
-              Raphael Giraud
+              Aman Singh
             </h2>
             <p className="text-muted-foreground text-sm">
-              Intership Application
+              Internship Application
             </p>
           </div>
         </div>
@@ -66,7 +66,7 @@ const InternshipCard = () => {
           <div>
             <p className="text-foreground text-sm font-medium">Location</p>
             <p className="text-muted-foreground text-sm">
-              Preferably San Francisco 🇺🇸
+              Preferably Pune, Mumbai, Bangalore 🇮🇳
             </p>
           </div>
         </div>
@@ -108,10 +108,7 @@ const InternshipCard = () => {
           What I bring
         </p>
         <p className="text-foreground text-sm">
-          Real-world AI dev experience from Lighton (MCP, secure GPTs, RAG
-          pipelines). <br /> 3x hackathon wins (ETH Oxford, Paris Blockchain
-          Week, Colosseum Breakout on Solana). <br /> I ship fast, and love
-          building useful things that actually work.
+          2x hackathon semifinalist (NEST, Createch). Worked for 2 startups (Ziel Lab and StepsAI) providing AI and backend solutions. At Ziel Lab, I automated outreach, CRM, and SEO workflows using N8N, Zapier, and HubSpot. Besides, I have researched under Dr. Parajyothi Borah as an intern, developing modular RAG from scratch. I ship fast, and love building useful things that actually work.
         </p>
       </div>
 

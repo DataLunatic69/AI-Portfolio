@@ -8,23 +8,18 @@ import Image from 'next/image';
 export function Resume() {
   // Resume details
   const resumeDetails = {
-    title: "Raphael's Resume",
+    title: "Aman's Resume",
     description: 'Full Stack Developer • AI Specialist',
     fileType: 'PDF',
     lastUpdated: 'March 2025',
     fileSize: '0.5 MB',
-    previewImageSrc: '/resume_giraud_preview.png',
-    downloadUrl: '/resume_giraud.pdf',
+    previewImageSrc: '/amanresume.png',
+    downloadUrl: 'https://drive.google.com/file/d/1U2OC7XATcQix168-gXHgAPuVVDnO077j/view?usp=drive_link',
   };
 
   const handleDownload = () => {
-    // Create a link element
-    const link = document.createElement('a');
-    link.href = resumeDetails.downloadUrl;
-    link.download = resumeDetails.downloadUrl.split('/').pop() || 'resume.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    // Open Google Drive link in new tab
+    window.open(resumeDetails.downloadUrl, '_blank');
   };
 
   return (
@@ -37,6 +32,17 @@ export function Resume() {
         transition={{ duration: 0.0, ease: 'easeOut' }}
         whileHover={{ scale: 1.01 }}
       >
+        {/* Resume preview image */}
+        <div className="relative h-48 w-full overflow-hidden">
+          <Image
+            src={resumeDetails.previewImageSrc}
+            alt="Resume Preview"
+            fill
+            className="object-cover transition-transform group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-black/20 transition-opacity group-hover:bg-black/10" />
+        </div>
+        
         {/* Details area (bottom part) */}
         <div className="p-5">
           <div className="flex items-center justify-between">

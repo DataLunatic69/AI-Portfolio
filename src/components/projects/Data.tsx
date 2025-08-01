@@ -7,322 +7,167 @@ import { url } from 'inspector';
 // Enhanced project content array with all projects
 const PROJECT_CONTENT = [
   {
-    title: 'Synto',
+    title: 'Agentic SDLC',
     description:
-      'Synto is an AI-powered interface that transforms complex blockchain interactions into simple, natural language commands. Whether you want to send tokens, stake assets, swap coins, or even create NFTs or liquidity pools, just tell Synto what to do — no manual wallet interactions, no technical jargon. One of my biggest projects yet',
+      'An AI-powered Software Development Life Cycle (SDLC) system that automates and streamlines the entire development process. This project leverages advanced AI agents to handle requirements gathering, design, development, testing, and deployment phases, making software development more efficient and intelligent.',
     techStack: [
-      'Next.js',
-      'TailwindCSS',
-      'Web3.js',
-      'shadcn-ui',
-      'TypeScript',
-      'Phantom Wallet',
-      'OpenAI API',
-      'Vercel AI SDK',
-      'Solana Agent kit',
-      'Neon',
-      'Prisma'
-    ],
-    date: '2025',
-    links: [
-      {
-        name: 'website',
-        url: 'https://synto.fun',
-      },
-
-      {
-        name: 'X',
-        url: 'https://x.com/Lazyfox502',
-      },
-
-      {
-        name: 'Pitch Deck',
-        url: 'https://drive.google.com/file/d/1B3m44mEgv81rJHfjNfTKi147yX4raQed/view?usp=sharing',
-      },
-
-    ],
-    images: [
-      {
-        src: '/synto1.png',
-        alt: 'Synto landing page',
-      },
-      {
-        src: '/synto2.png',
-        alt: 'Synto chat interface',
-      },
-      {
-        src: '/synto3.png',
-        alt: 'Synto chat interface',
-      },
-      {
-        src: '/synto4.png',
-        alt: 'Synto chat interface',
-      },
-      {
-        src: '/synto5.png',
-        alt: 'Synto chat interface',
-      },
-      {
-        src: '/synto6.png',
-        alt: 'Synto chat interface',
-      },
-    ],
-  },
-  {
-    title: 'Rrate',
-    description:
-      "Rrate is a fun website to allow user to compare his salary with the richest people in the world. Try it now it's online!",
-    techStack: ['Html', 'Css', 'Javascript'],
-    date: '2024',
-    links: [
-      {
-        name: 'website',
-        url: 'https://rrate.app',
-      },
-      {
-        name: 'github',
-        url: 'https://github.com/DataLunatic69/Rrate',
-      },
-    ],
-    images: [
-      {
-        src: '/rrate1.png',
-        alt: 'Rrate landing page',
-      },
-      {
-        src: '/rrate2.png',
-        alt: 'Rrate comparison page',
-      },
-      {
-        src: '/rrate3.png',
-        alt: 'Rrate comparison page',
-      },
-    ],
-  },
-  {
-    title: 'Defai',
-    description:
-      "We Win ETHOXford hackathon by building DEFAI. DEFAI stands for Decentralized Finance Artificial Intelligence. It's an AI-powered chat interface that simplifies on-chain operations on the Avalanche blockchain by allowing users to interact using natural language. This makes complex DeFi operations accessible even for those with limited technical expertise.",
-    techStack: [
-      'Next.js',
-      'TailwindCSS',
-      'shadcn-ui',
-      'Vercel AI SDK',
-      'TypeScript',
-    ],
-    date: '2025',
-    links: [
-      {
-        name: 'website',
-        url: 'https://dorahacks.io/buidl/22605',
-      },
-      {
-        name: 'github',
-        url: 'https://github.com/DataLunatic69/DEFAI',
-      },
-      {
-        name: 'LinkedIn',
-        url: 'https://www.linkedin.com/in/aman-singh-3a6551259/',
-      },
-      {
-        name: 'Youtube Video',
-
-      }
-    ],
-    images: [
-      {
-        src: '/defai1.png',
-        alt: 'Landing Page of Defai',
-      },
-      {
-        src: '/defai2.png',
-        alt: 'Confirmation popup of Defai',
-      },
-      {
-        src: '/defai3.png',
-        alt: 'Chatbot of Defai',
-      },
-      {
-        src: '/defai4.jpeg',
-        alt: 'Winner team',
-      },
-    ],
-  },
-  {
-    title: 'Fitgear',
-    description:
-      'Won the Gotta Go Hack IA by building Fitgear, a virtual voice seller accessible by QR code to improve the ratio between customers and sellers. Created an AI pipeline with API calls and a RAG system for natural language interactions.',
-    techStack: ['Next.js', 'TailwindCSS', 'OpenAI API', 'Langchain'],
-    date: '2024',
-    links: [
-      {
-        name: 'Linkedin',
-        url: 'https://www.linkedin.com/in/aman-singh-3a6551259/',
-      },
-    ],
-    images: [
-      {
-        src: '/fitgear2.png',
-        alt: 'Fitgear chatbot',
-      },
-      {
-        src: '/fitgear1.png',
-        alt: 'Fitgear landing page',
-      },
-    ],
-  },
-  {
-    title: 'Datai',
-    description:
-      "DATAI is an AI-powered agent that lets non-technical users query a database using natural language without writing SQL. Built using Next.js, TailwindCSS, shadcn-ui, and Anthropic's Claude API, this project focuses on simplicity, speed, and user-friendly design.",
-    techStack: [
-      'Next.js',
-      'TailwindCSS',
-      'shadcn-ui',
-      'Claude API',
-      'TypeScript',
+      'Python',
+      'AI/ML',
+      'Docker',
+      'Kubernetes',
+      'CI/CD',
+      'Microservices',
+      'REST APIs',
+      'PostgreSQL',
+      'Redis'
     ],
     date: '2024',
     links: [
       {
         name: 'GitHub',
-        url: 'https://github.com/DataLunatic69/datai',
+        url: 'https://github.com/DataLunatic69/Agentic-SDLC',
       },
       {
-        name: 'Youtube Video Demo',
-        url: 'https://youtu.be/iE0RXjdbQsw',
-      }
-    ],
-    images: [
-      {
-        src: '/datai1.png',
-        alt: 'Datai landing page',
-      },
-      {
-        src: '/datai2.png',
-        alt: 'Datai chatbot',
-      },
-      {
-        src: '/datai3.png',
-        alt: 'Datai chatbot',
-      },
-      {
-        src: '/datai4.png',
-        alt: 'Datai chatbot',
-      }
-    ],
-  },
-  {
-    title: '3d Pong Game',
-    description:
-      "Transcendance is the final project of my 42 cursus. It's a 3D pong game with multiplayer capabilities, user authentication, and real-time gameplay. We had to do everything from scratch, so it was pretty challenging and we learned a lot.",
-    techStack: ['Django', 'Python', 'JavaScript', 'Websockets', 'PostgreSQL', 'Docker', 'Nginx', 'Web3', 'Solidity'],
-    date: '2023',
-    links: [
-      {
-        name: 'GitHub',
-        url: 'https://github.com/DataLunatic69/Transcendance',
+        name: 'Demo',
+        url: '#',
       },
     ],
     images: [
       {
-        src: '/trans1.png',
-        alt: 'Transcendance landing page',
-      },
-      {
-        src: '/trans2.png',
-        alt: 'Transcendance game',
-      },
-      {
-        src: '/trans3.png',
-        alt: 'Transcendance game',
-      },
-      {
-        src: '/trans4.png',
-        alt: 'Transcendance game',
-      },
-      {
-        src: '/trans5.png',
-        alt: 'Transcendance game',
-      },
-      {
-        src: '/trans6.png',
-        alt: 'Transcendance game',
-      }
-
-    ],
-  },
-  {
-    title: 'Minishell',
-    description:
-      "Minishell is a project that aims to create a simple shell. It's a great introduction to process creation and management in C, offering fundamental Unix command-line functionality. This was a very challenging project, but I learned a lot from it.",
-    techStack: ['C', 'Unix', 'Bash'],
-    date: '2023',
-    links: [
-      {
-        name: 'GitHub',
-        url: 'https://github.com/DataLunatic69/Michelle-42',
-      },
-    ],
-    images: [
-      {
-        src: '/minishell1.png',
-        alt: 'Minishell landing page',
-      }
-    ],
-  },
-  {
-    title: 'YouBot',
-    description:
-      'YouBot is a Python Bot that Scrapes Videos from Pexels, adds a random song from a Songs Folder, then auto-uploads the videos to your YouTube Channel for continuous content generation.',
-    techStack: ['Python', 'YouTube API', 'Pexels API'],
-    date: '2022',
-    links: [
-      {
-        name: "YouTube Video",
-        url: "https://youtu.be/vp1v5mBG7rA "
-      },
-      {
-        name: 'GitHub',
-        url: 'https://github.com/DataLunatic69/YouBot',
-      }
-    ],
-    images: [
-      {
-        src: '/youbot1.jpg',
-        alt: 'Youbot landing page',
-      },
-      {
-        src: '/youbot2.png',
-        alt: 'Youbot chatbot',
+        src: '/Agentic SDLC.jpeg',
+        alt: 'Agentic SDLC System Overview',
       },
     ],
   },
   {
-    title: 'Old Portfolio',
+    title: 'CodeAnalyser',
     description:
-      'My previous traditional portfolio built with vanilla HTML, CSS and JS with GSAP animations for a smooth and interactive user experience.',
-    techStack: ['HTML', 'CSS', 'JavaScript', 'GSAP'],
-    date: '2022',
+      'An intelligent code analysis tool that uses AI to review, optimize, and suggest improvements for code quality. The system can detect potential bugs, security vulnerabilities, and performance issues while providing actionable recommendations for better code practices.',
+    techStack: [
+      'Python',
+      'AST Analysis',
+      'Machine Learning',
+      'NLP',
+      'FastAPI',
+      'React',
+      'TypeScript',
+      'Docker'
+    ],
+    date: '2024',
     links: [
       {
-        name: 'Website',
-        url: 'https://retrodev.github.io/oldPortfolio/',
+        name: 'GitHub',
+        url: 'https://github.com/DataLunatic69/CodeAnalyser',
       },
       {
-        name: 'GitHub',
-        url: 'https://github.com/DataLunatic69/portfolio',
+        name: 'Documentation',
+        url: '#',
       },
     ],
     images: [
       {
-        src: '/oldport1.png',
-        alt: 'Old Portfolio landing page',
+        src: '/CodeAnalyser.png',
+        alt: 'CodeAnalyser Interface',
+      },
+    ],
+  },
+  {
+    title: 'Image Quantization',
+    description:
+      'A sophisticated image processing application that implements advanced quantization algorithms to reduce image file sizes while maintaining visual quality. This tool is particularly useful for web optimization and storage efficiency.',
+    techStack: [
+      'Python',
+      'OpenCV',
+      'NumPy',
+      'Pillow',
+      'Streamlit',
+      'Image Processing',
+      'K-means Clustering',
+      'Color Theory'
+    ],
+    date: '2024',
+    links: [
+      {
+        name: 'GitHub',
+        url: 'https://github.com/DataLunatic69/Image-Quantization',
       },
       {
-        src: '/oldport2.png',
-        alt: 'Old Portfolio projects',
-      }
+        name: 'Live Demo',
+        url: '#',
+      },
+    ],
+    images: [
+      {
+        src: '/image quantization.jpeg',
+        alt: 'Image Quantization Results',
+      },
+    ],
+  },
+  {
+    title: 'MultiModal PDF',
+    description:
+      'A cutting-edge PDF processing system that combines multiple AI modalities to extract, analyze, and understand content from PDF documents. The system can handle text, images, tables, and complex layouts with high accuracy.',
+    techStack: [
+      'Python',
+      'Computer Vision',
+      'OCR',
+      'NLP',
+      'Transformers',
+      'FastAPI',
+      'React',
+      'PDF Processing',
+      'TensorFlow'
+    ],
+    date: '2024',
+    links: [
+      {
+        name: 'GitHub',
+        url: 'https://github.com/DataLunatic69/MultiModal-PDF',
+      },
+      {
+        name: 'API Documentation',
+        url: '#',
+      },
+    ],
+    images: [
+      {
+        src: '/MultiModalPDF.png',
+        alt: 'MultiModal PDF Processing Interface',
+      },
+    ],
+  },
+  {
+    title: 'FallbackSystem',
+    description:
+      'A robust fallback and error handling system designed for high-availability applications. This system provides intelligent failover mechanisms, automatic recovery, and comprehensive monitoring to ensure continuous service availability.',
+    techStack: [
+      'Python',
+      'System Design',
+      'Microservices',
+      'Docker',
+      'Kubernetes',
+      'Monitoring',
+      'Logging',
+      'Alerting',
+      'Redis',
+      'PostgreSQL'
+    ],
+    date: '2024',
+    links: [
+      {
+        name: 'GitHub',
+        url: 'https://github.com/DataLunatic69/FallbackSystem',
+      },
+      {
+        name: 'Architecture Docs',
+        url: '#',
+      },
+    ],
+    images: [
+      {
+        src: '/FallbackSystem.png',
+        alt: 'Fallback System Architecture',
+      },
     ],
   },
 ];
@@ -431,57 +276,33 @@ const ProjectContent = ({ project }: { project: ProjectProps }) => {
 // Main data export with updated content
 export const data = [
   {
-    category: 'Startup Project',
-    title: 'Synto',
-    src: '/syntopreview.png',
-    content: <ProjectContent project={{ title: 'Synto' }} />,
+    category: 'AI Development',
+    title: 'Agentic SDLC',
+    src: '/Agentic SDLC.jpeg',
+    content: <ProjectContent project={{ title: 'Agentic SDLC' }} />,
   },
   {
-    category: 'Fun Tool',
-    title: 'Rrate',
-    src: '/ratepreview.png',
-    content: <ProjectContent project={{ title: 'Rrate' }} />,
+    category: 'Code Analysis',
+    title: 'CodeAnalyser',
+    src: '/CodeAnalyser.png',
+    content: <ProjectContent project={{ title: 'CodeAnalyser' }} />,
   },
   {
-    category: 'Hackathon Winner',
-    title: 'Defai',
-    src: '/defaipreview.png',
-    content: <ProjectContent project={{ title: 'Defai' }} />,
+    category: 'Image Processing',
+    title: 'Image Quantization',
+    src: '/image quantization.jpeg',
+    content: <ProjectContent project={{ title: 'Image Quantization' }} />,
   },
   {
-    category: 'Hackathon Winner',
-    title: 'Fitgear',
-    src: '/fitgearpreview.png',
-    content: <ProjectContent project={{ title: 'Fitgear' }} />,
+    category: 'Document AI',
+    title: 'MultiModal PDF',
+    src: '/MultiModalPDF.png',
+    content: <ProjectContent project={{ title: 'MultiModal PDF' }} />,
   },
   {
-    category: 'Business Intelligence',
-    title: 'Datai',
-    src: '/dataipreview.png',
-    content: <ProjectContent project={{ title: 'Datai' }} />,
-  },
-  {
-    category: '42 Project',
-    title: '3d Pong Game',
-    src: '/transcendancepreview.png',
-    content: <ProjectContent project={{ title: '3d Pong Game' }} />,
-  },
-  {
-    category: '42 Project',
-    title: 'Minishell',
-    src: '/minishellpreview.png',
-    content: <ProjectContent project={{ title: 'Minishell' }} />,
-  },
-  {
-    category: 'Automation',
-    title: 'YouBot',
-    src: '/youbotpreview.png',
-    content: <ProjectContent project={{ title: 'YouBot' }} />,
-  },
-  {
-    category: 'Web Development',
-    title: 'Old Portfolio',
-    src: '/oldportfoliopreview.png',
-    content: <ProjectContent project={{ title: 'Old Portfolio' }} />,
+    category: 'System Architecture',
+    title: 'FallbackSystem',
+    src: '/FallbackSystem.png',
+    content: <ProjectContent project={{ title: 'FallbackSystem' }} />,
   },
 ];

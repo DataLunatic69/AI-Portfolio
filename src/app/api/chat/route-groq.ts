@@ -1,5 +1,3 @@
-import { openai } from '@ai-sdk/openai';
-import { streamText } from 'ai';
 import { SYSTEM_PROMPT } from './prompt';
 import { getContact } from './tools/getContact';
 import { getCrazy } from './tools/getCrazy';
@@ -32,31 +30,35 @@ export async function POST(req: Request) {
 
     messages.unshift(SYSTEM_PROMPT);
 
-    const tools = {
-      getProjects,
-      getPresentation,
-      getResume,
-      getContact,
-      getSkills,
-      getSports,
-      getCrazy,
-      getInternship,
-    };
-
-    const result = streamText({
-      model: openai('gpt-4o-mini'),
-      messages,
-      toolCallStreaming: true,
-      tools,
-      maxSteps: 2,
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.GROQ_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'llama3-8b-8192',
+        messages,
+        stream: true,
+        temperature: 0.7,
+        max_tokens: 1000,
+      }),
     });
 
-    return result.toDataStreamResponse({
-      getErrorMessage: errorHandler,
+    if (!response.ok) {
+      throw new Error(`Groq API error: ${response.statusText}`);
+    }
+
+    return new Response(response.body, {
+      headers: {
+        'Content-Type': 'text/plain; charset=utf-8',
+        'Cache-Control': 'no-cache',
+        'Connection': 'keep-alive',
+      },
     });
   } catch (err) {
     console.error('Global error:', err);
     const errorMessage = errorHandler(err);
     return new Response(errorMessage, { status: 500 });
   }
-}
+} 
