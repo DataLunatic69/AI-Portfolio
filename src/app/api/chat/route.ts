@@ -30,6 +30,8 @@ export async function POST(req: Request) {
     // Add system prompt at the beginning
     cleanMessages.unshift(SYSTEM_PROMPT);
 
+    console.log('[CHAT-API] Cleaned messages:', JSON.stringify(cleanMessages, null, 2));
+
     const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -52,7 +54,10 @@ export async function POST(req: Request) {
     }
 
     const data = await response.json();
+    console.log('[CHAT-API] Groq response:', JSON.stringify(data, null, 2));
+    
     const content = data.choices[0]?.message?.content || 'Sorry, I could not generate a response.';
+    console.log('[CHAT-API] Extracted content:', content);
 
     // Return the response in a format that the frontend can handle
     return new Response(JSON.stringify({ 
