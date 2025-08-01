@@ -1,4 +1,4 @@
-import { SYSTEM_PROMPT } from './prompt';
+import { SYSTEM_PROMPT } from '../chat/prompt';
 
 export const maxDuration = 30;
 
@@ -18,7 +18,7 @@ function errorHandler(error: unknown) {
 export async function POST(req: Request) {
   try {
     const { messages } = await req.json();
-    console.log('[CHAT-API] Incoming messages:', messages);
+    console.log('[CHAT-SIMPLE] Incoming messages:', messages);
 
     // Clean messages to be compatible with Groq API
     const cleanMessages = messages.map((msg: any) => {
@@ -54,31 +54,36 @@ export async function POST(req: Request) {
     const data = await response.json();
     const content = data.choices[0]?.message?.content || 'Sorry, I could not generate a response.';
 
-    // Create a simple streaming response that the Vercel AI SDK can handle
-    const stream = new ReadableStream({
-      start(controller) {
-        // Send the complete response as a single chunk in the correct format
-        const responseData = {
-          type: 'text-delta',
-          textDelta: content
-        };
-        
-        controller.enqueue(new TextEncoder().encode(`data: ${JSON.stringify(responseData)}\n\n`));
-        controller.enqueue(new TextEncoder().encode('data: [DONE]\n\n'));
-        controller.close();
-      },
-    });
-
-    return new Response(stream, {
+    // Return a simple JSON response
+    return new Response(JSON.stringify({
+      success: true,
+      message: {
+        id: Date.now().toString(),
+        role: 'assistant',
+        content: content,
+        parts: [
+          {
+            type: 'text',
+            text: content
+          }
+        ]
+      }
+    }), {
       headers: {
-        'Content-Type': 'text/plain; charset=utf-8',
-        'Cache-Control': 'no-cache',
-        'Connection': 'keep-alive',
+        'Content-Type': 'application/json',
       },
     });
   } catch (err) {
     console.error('Global error:', err);
     const errorMessage = errorHandler(err);
-    return new Response(errorMessage, { status: 500 });
+    return new Response(JSON.stringify({ 
+      success: false, 
+      error: errorMessage 
+    }), { 
+      status: 500,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
   }
-}
+} 
